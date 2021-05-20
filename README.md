@@ -1,8 +1,8 @@
 # Projects
-<h2> 1 - simple calculator in C#, with ( + - * / ) part of some studies. pretty simple code. <h2>
-  <br/>
-<h2> 2 - Stopwatch, when u set a time that's will do a countdown till 0.<h2>
-
+<h2> 1 - simple calculator in C# <h2>
+  <label> with ( + - * / ) operators, part of some studies. pretty simple code.</label>
+<h2> 2 - Stopwatch <h2>
+ <label> When you set a time that's will do a countdown till 0.</label>
 
 ------------------------------------------------
 
