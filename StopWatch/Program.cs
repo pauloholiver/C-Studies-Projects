@@ -18,37 +18,40 @@ namespace StopWatch
             Console.WriteLine("0 - Sair");
 
             string data =  Console.ReadLine().ToLower();
-            string tipo = data.Substring(data.Length -1, 1);
-            int tempo = int.Parse(data.Substring(0, data.Length -1));
+            string type = data.Substring(data.Length -1, 1); //ignore all caracteres expect the last one (type)
+            int time = int.Parse(data.Substring(0, data.Length -1)); //get the first caracteres and ignore the oters (last one)
             int multiplier = 1;
 
-            if(tipo == "m")
+            if(type == "m") //in case of Minutes (2m) -> 120s
             
             multiplier = 60;
 
-            if(tipo == "s")
+            if(type == "s") //in case of Seconds (45s)
 
             multiplier = 1;
 
-            ReadySetGo(tempo * multiplier);
+            ReadySetGo(time * multiplier);
         }
 
-        static void Cronometrar(int tempo)
+        //main function, as long as the time is bigger than 0, keeps the loop active
+        static void Countdown(int time)
         {
             Console.WriteLine("Certo, Contagem iniciando...");
-                Console.WriteLine(tempo);
-            while(tempo > 0){
+                Console.WriteLine(time);
+            while(time > 0){
                 Console.Clear();
-                Console.WriteLine(tempo);
-                Thread.Sleep(1000);
-                tempo--;
+                Console.WriteLine(time);
+                Thread.Sleep(1000); //The sleep function make the system interrupt the read by (timer/1000)
+                time--;
             }
             Console.WriteLine("Contagem finalizada. Obrigado");
             Thread.Sleep(2500);
             Menu();
         }
 
-        static void ReadySetGo(int tempo){
+
+        //pre function, just to animate and make that fluid, could be directly to Countdown
+        static void ReadySetGo(int time){
             Console.Clear();
             Console.WriteLine("Ready...");
             Thread.Sleep(1000);
@@ -59,7 +62,7 @@ namespace StopWatch
             Console.WriteLine("Go!!!");
             Thread.Sleep(3000);
             Console.Clear();
-            Cronometrar(tempo);
+            Countdown(time);
             Console.Clear();
             Console.WriteLine("Contagem finalizada. Obrigado");
             Thread.Sleep(2500);
