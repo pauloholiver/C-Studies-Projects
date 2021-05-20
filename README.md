@@ -1,5 +1,6 @@
 # Calculator
-A simple calculator in C#, part of some studies.
+1 - simple calculator in C#, with ( + - * / ) part of some studies. pretty simple code.
+2 - Stopwatch, when u set a time that's will do a countdown till 0.
 
 
 ------------------------------------------------
