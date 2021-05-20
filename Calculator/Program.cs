@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Threading;
 
-namespace Calculator
+namespace StopWatch
 {
     class Program
     {
@@ -9,77 +10,63 @@ namespace Calculator
             Menu();
         }
 
-        static void Soma()
-        {
-            Console.WriteLine("Primeiro Valor: ");
-            float v1 = float.Parse(Console.ReadLine());
-            Console.WriteLine("Segundo Valor: ");
-            float v2 = float.Parse(Console.ReadLine());
-            float result = v1 + v2;
-            Console.WriteLine($"Soma dos Valores é: " + result);
-            Console.ReadKey();
-            Menu();
-        }
-        static void Subtracao()
-        {
-            Console.WriteLine("Primeiro Valor: ");
-            float v1 = float.Parse(Console.ReadLine());
-            Console.WriteLine("Segundo Valor: ");
-            float v2 = float.Parse(Console.ReadLine());
-            float result = v1 - v2;
-            Console.WriteLine($"Subtração dos Valores é: " + result);
-            Console.ReadKey();
-            Menu();
-        }
-        static void Divisao()
-        {
-            Console.WriteLine("Primeiro Valor: ");
-            float v1 = float.Parse(Console.ReadLine());
-            Console.WriteLine("Segundo Valor: ");
-            float v2 = float.Parse(Console.ReadLine());
-            float result = v1 / v2;
-            Console.WriteLine($"Divisão dos Valores é: " + result);
-            Console.ReadKey();
-            Menu();
-        }
-        static void Multiplicacao()
-        {
-            Console.WriteLine("Primeiro Valor: ");
-            float v1 = float.Parse(Console.ReadLine());
-            Console.WriteLine("Segundo Valor: ");
-            float v2 = float.Parse(Console.ReadLine());
-            float result = v1 * v2;
-            Console.WriteLine($"Multiplicação dos Valores é: " + result);
-            Console.ReadKey();
-            Menu();
-        }
-
-        static void Menu()
-        {
+        static void Menu(){
             Console.Clear();
-            Console.WriteLine("Qual operação de calculo gostaria de fazer?");
-            Console.WriteLine("1 - Soma");
-            Console.WriteLine("2 - Subtração");
-            Console.WriteLine("3 - Multiplicação");
-            Console.WriteLine("4 - Divisão");
+            Console.WriteLine("Quanto tempo gostaria de cronometrar?");
+            Console.WriteLine("S - Segundos - 10s - 10 Segundos");
+            Console.WriteLine("M - Minutos - 2m - 2 Minutos");
+            Console.WriteLine("0 - Sair");
 
-            Console.WriteLine("0 - Fechar Calculadora");
-            Console.WriteLine("-----------------------");
+            string data =  Console.ReadLine().ToLower();
+            string type = data.Substring(data.Length -1, 1); //ignore all caracteres expect the last one (type)
+            int time = int.Parse(data.Substring(0, data.Length -1)); //get the first caracteres and ignore the oters (last one)
+            int multiplier = 1;
 
-            int res = int.Parse(Console.ReadLine());
+            if(type == "m") //in case of Minutes (2m) -> 120s
+            
+            multiplier = 60;
 
-            switch (res)
-            {
-                case 1: Soma(); break;
-                case 2: Subtracao(); break;
-                case 3: Multiplicacao(); break;
-                case 4: Divisao(); break;
-                case 0:
-                    Console.WriteLine("Obrigado, Volte sempre!!");
-                    System.Environment.Exit(0);
-                    break;
-                default: Menu(); break;
+            if(type == "s") //in case of Seconds (45s)
+
+            multiplier = 1;
+
+            ReadySetGo(time * multiplier);
+        }
+
+        //main function, as long as the time is bigger than 0, keeps the loop active
+        static void Countdown(int time)
+        {
+            Console.WriteLine("Certo, Contagem iniciando...");
+                Console.WriteLine(time);
+            while(time > 0){
+                Console.Clear();
+                Console.WriteLine(time);
+                Thread.Sleep(1000); //The sleep function make the system interrupt the read by (timer/1000)
+                time--;
             }
+            Console.WriteLine("Contagem finalizada. Obrigado");
+            Thread.Sleep(2500);
+            Menu();
+        }
+
+
+        //pre function, just to animate and make that fluid, could be directly to Countdown
+        static void ReadySetGo(int time){
+            Console.Clear();
+            Console.WriteLine("Ready...");
+            Thread.Sleep(1000);
+            Console.Clear();
+            Console.WriteLine("Set...");
+            Thread.Sleep(1000);
+            Console.Clear();
+            Console.WriteLine("Go!!!");
+            Thread.Sleep(3000);
+            Console.Clear();
+            Countdown(time);
+            Console.Clear();
+            Console.WriteLine("Contagem finalizada. Obrigado");
+            Thread.Sleep(2500);
+            Menu();
         }
     }
 }
